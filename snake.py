@@ -6,7 +6,7 @@ from random import randint
 
 class Snake:
     def __init__(self, x, y):
-        self.body = [[y+1,  x], [y, x]]
+        self.body = [[y + 1, x], [y, x]]
         self.dir = curses.KEY_DOWN
 
     def move(self):
@@ -18,13 +18,13 @@ class Snake:
 
         # Insert new vector at idx 0 based on dir
         if self.dir == curses.KEY_RIGHT:
-            self.body.insert(0, [y, x+1])
+            self.body.insert(0, [y, x + 1])
         elif self.dir == curses.KEY_LEFT:
-            self.body.insert(0, [y, x-1])
+            self.body.insert(0, [y, x - 1])
         elif self.dir == curses.KEY_UP:
-            self.body.insert(0, [y-1, x])
+            self.body.insert(0, [y - 1, x])
         elif self.dir == curses.KEY_DOWN:
-            self.body.insert(0, [y+1, x])
+            self.body.insert(0, [y + 1, x])
 
     def grow(self):
         x = self.body[len(self.body) - 1][1]
@@ -58,7 +58,12 @@ class Snake:
 
     def check_wall_collision(self, rows, cols):
         # we gotta put some logic here
-        if self.body[0][0] < 0 or self.body[0][0] > rows - 1 or self.body[0][1] < 0 or self.body[0][1] > cols - 1:
+        if (
+            self.body[0][0] < 0
+            or self.body[0][0] > rows - 1
+            or self.body[0][1] < 0
+            or self.body[0][1] > cols - 1
+        ):
             return True
         return False
 
@@ -73,7 +78,7 @@ class Board:
     def __init__(self, rows, cols):
         self.rows = rows
         self.cols = cols
-        self.tokens = {0: ' . ', 1: ' # ', 2: ' @ '}
+        self.tokens = {0: " . ", 1: " # ", 2: " @ "}
         self.board = [[0 for i in range(self.cols)] for j in range(self.rows)]
 
     def print_board(self, stdscr, snake, apple):
@@ -131,7 +136,7 @@ def main(stdscr):
         snake.move()
 
         stdscr.refresh()
-        time.sleep(.2)
+        time.sleep(0.2)
 
 
 if __name__ == "__main__":
